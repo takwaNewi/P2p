@@ -1,0 +1,57 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build GUI Project",
+            "type": "shell",
+            "command": "javac",
+            "args": [
+                "-d",
+                "bin",
+                "src/models/*.java",
+                "src/rmi/*.java",
+                "src/corba/*.java",
+                "src/StudySystem/*.java"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$javac"
+            ]
+        },
+        {
+            "label": "Run GUI Application",
+            "type": "shell",
+            "command": "java",
+            "args": [
+                "-cp",
+                "bin",
+                "rmi.MainGUI"
+            ],
+            "dependsOn": ["Build GUI Project"],
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Console Mode",
+            "type": "shell",
+            "command": "java",
+            "args": [
+                "-cp",
+                "bin",
+                "rmi.Main"
+            ],
+            "dependsOn": ["Build GUI Project"],
+            "problemMatcher": []
+        },
+        {
+            "label": "Start RMI Registry",
+            "type": "shell",
+            "command": "rmiregistry",
+            "args": ["1099"],
+            "isBackground": true,
+            "problemMatcher": []
+        }
+    ]
+}

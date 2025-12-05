@@ -1,0 +1,30 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "rmi.Main",
+            "projectName": "P2p_802662dd"
+        },
+        {
+            "name": "Launch GUI",
+            "type": "java",
+            "request": "launch",
+            "mainClass": "rmi.MainGUI",
+            "projectName": "P2p",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Launch Console",
+            "type": "java",
+            "request": "launch",
+            "mainClass": "rmi.Main",
+            "projectName": "P2p",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        }
+    ]
+}

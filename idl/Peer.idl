@@ -1,0 +1,62 @@
+// idl/Peer.idl
+module StudySystem {
+ // Structure pour une question
+ struct Question {
+ string id;
+ string subject;
+ string content;
+ sequence<string> answers;
+ string correctAnswer;
+ long long timestamp;
+ string authorId; // <-- ADDED SEMICOLON
+};
+ // Structure pour un message gossip
+ struct GossipMessage {
+ string messageId;
+ string type;
+ string payload;
+ long long timestamp;
+ long long version;
+ string sourceId; // <-- ADDED SEMICOLON
+ };
+ // Structure pour les informations d'un peer
+ struct PeerInfo {
+ string peerId;
+ string host;
+ long port;
+ long long lastSeen; // <-- ADDED SEMICOLON
+ };
+ // Structure pour une entrée de score
+ struct ScoreEntry {
+ string subject;
+ long score; // <-- ADDED SEMICOLON
+ };
+// Structure pour les statistiques
+ struct Statistics {
+ string studentId;
+ sequence<ScoreEntry> subjectScores;
+ long long lastUpdate; // <-- ADDED SEMICOLON
+ };
+    
+    // TYPEDEFS (Fix for previous error)
+    typedef sequence<Question> QuestionSequence;
+    typedef sequence<PeerInfo> PeerInfoSequence;
+    
+ // Interface principale du Peer
+ interface Peer {
+ // Gestion des questions
+ QuestionSequence getQuestions(in string subject); // <-- USING TYPEDEF
+ void shareQuestion(in Question q);
+ // Protocole Gossip
+ void receiveGossip(in GossipMessage msg);
+ // Gestion des peers
+ PeerInfo getPeerInfo();
+ void registerPeer(in PeerInfo peerInfo);
+ PeerInfoSequence getKnownPeers(); // <-- USING TYPEDEF
+ // Statistiques
+ Statistics getStatistics(in string studentId);
+ void updateStatistics(in Statistics stats);
+ // Utilitaires
+ boolean ping(); // <-- ADDED SEMICOLON
+ }; // <-- ADDED SEMICOLON (This one may or may not be strictly required by IDLJ, but good practice)
+}; // <-- No semicolon needed here
